@@ -17,7 +17,7 @@ export default function Nav(props){
 
     return(
         <div className="nav-bar">
-            <h1>To-<span className='default-color'>DO</span>-List</h1>
+            <h1 className='head-icon'>To-<span className='cover'>DO</span>-List</h1>
             <FontAwesomeIcon onClick={()=>toggle()} className="burger-icon" icon={faBars}> </FontAwesomeIcon>
             <ul>
                 <a href="#">{props.user ? props.user.name : "Home"}</a>
