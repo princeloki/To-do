@@ -4,6 +4,7 @@ import React from 'react';
 import { useState } from 'react';
 import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons'
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
@@ -17,9 +18,10 @@ export default function Item(props){
     })
 
     function handleSubmit(event){
+        const date = new Date();
         setItemInfo({
             count: itemInfo.count,
-            content: name,
+            content: name + " on " +date,
             complete: true
         })
         console.log(itemInfo.content)
@@ -38,13 +40,16 @@ export default function Item(props){
                 <button type="submit">
                     <FontAwesomeIcon onClick={handleSubmit}className="icon" icon={faArrowRightToBracket}></FontAwesomeIcon>
                 </button>
+                <button>
+                    <FontAwesomeIcon onClick={props.onRemove} className="icon" icon={faCircleXmark}></FontAwesomeIcon>
+                </button>
             </form>}
             {
             itemInfo.complete && 
             <div className="list-item">
                 <h2 className="list-header">{itemInfo.content}</h2>
                 <button>
-                    <FontAwesomeIcon onClick={()=>setItemInfo({...itemInfo, complete:false})} className="icon" icon={faCircleXmark}></FontAwesomeIcon>
+                    <FontAwesomeIcon onClick={()=>setItemInfo({...itemInfo, complete:false})} className="icon" icon={faPenToSquare}></FontAwesomeIcon>
                 </button>
             </div>
             }

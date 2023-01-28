@@ -17,13 +17,25 @@ export default function Main(props){
         ]
     );
 
+    useEffect(() => {
+        setCount(items.length);
+    }, [items]);
+
     function addItem(){
-        setCount(count + 1);
         setItems(prevItems=>[...prevItems,{
             count: count+1,
             content: "",
             complete: false,
-    }])
+        }])
+    
+        setCount(items.length + 1);
+    }
+
+    
+    const handleRemove = (index)=>{
+        const newItems = [...items]
+        newItems.splice(index, 1);
+        setItems(newItems)
     }
 
     const listItems = items.map((item)=>{
@@ -33,6 +45,7 @@ export default function Main(props){
         count={item.count}
         content={item.content}
         complete={item.complete}
+        onRemove={()=>handleRemove(item.count-1)}
         />)
     })
 
