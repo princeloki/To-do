@@ -19,9 +19,9 @@ export default function Nav(props){
             <h1 className='head-icon'>To-<span className='cover'>DO</span>-List</h1>
             <FontAwesomeIcon onClick={()=>toggle()} className="burger-icon" icon={faBars}> </FontAwesomeIcon>
             <ul>
-                <a href="/">{props.user ? props.user.name : "Home"}</a>
-                <a href="login" >{props.user ? "Logout" : "Login"}</a>
-                {!props.user && <a href="register" >Register</a>}
+                <a href="/">Home</a>
+                <a href={props.username ? "Logout" : "Login"} >{props.username ? "Logout" : "Login"}</a>
+                <a href={props.username ? "profile" : "register"} >{props.username ? "Profile" : "Register"}</a>
             </ul>
             
         <style>{`

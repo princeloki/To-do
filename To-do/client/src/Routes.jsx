@@ -7,12 +7,12 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
 
-const Pages = () => (
+const Pages = (props) => (
   <Routes>
-    <Route exact path="/" element={<HomePage />} />
-    <Route path="/login" element={<LoginPage />} />
+    <Route exact path="/" element={<HomePage username={props.username} items={props.items} />} />
+    <Route path="/login" element={<LoginPage addUser={props.addUser}/>} />
     <Route path="/register" element={<RegisterPage />} />
-    <Route path="/profile" element={<ProfilePage />} />
+    <Route path="/profile" element={<ProfilePage username={props.username} />} />
     {/* <Route component={NotFoundPage} /> */}
   </Routes>
 );

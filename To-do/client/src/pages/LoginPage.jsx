@@ -5,8 +5,10 @@ import Main from './components/Main'
 import Nav from './components/Nav'
 import { useState,useEffect } from 'react'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-function LoginPage() {
+function LoginPage(props) {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -23,6 +25,7 @@ function LoginPage() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    
     axios.post('http://localhost:3000/login', formData)
       .then(res => {
         if(!res.data){
@@ -30,10 +33,8 @@ function LoginPage() {
         } else if(res.data.message === 'Password does not match'){
           alert('Password does not match')
         }
-        axios.post('/users', res.data)
-        .then(data => {
-          console.log(data)
-        })
+        props.addUser(res.data)  
+        navigate('/', { replace: true })
       })
       .catch(err => {
         console.error(err)

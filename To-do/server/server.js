@@ -55,11 +55,10 @@ app.post('/login', async (req, res) => {
             bcrypt.compare(password, user.password, function(err, result) {
                 if (result === true) {
                   req.session.userData = {
-                    userName: user.username,
+                    username: user.username,
                     items: user.items
                     }
                   res.send(req.session.userData)
-
                 } else {
                   res.send({message: 'Password does not match'});
                 }
@@ -71,6 +70,10 @@ app.post('/login', async (req, res) => {
     } catch(err){
         res.json({error: err.message});
     }
+})
+
+app.get("/logout", (req, res) => {
+    req.session.destroy()
 })
 
 mongoose.connect(

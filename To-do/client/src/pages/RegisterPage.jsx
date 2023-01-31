@@ -5,8 +5,12 @@ import Main from './components/Main'
 import Nav from './components/Nav'
 import { useState,useEffect } from 'react'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+
 
 function RegisterPage() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     username: "",
@@ -31,7 +35,7 @@ function RegisterPage() {
     e.preventDefault();
     axios.post('http://localhost:3000/register', formData)
       .then(res => {
-        console.log(res.data)
+        navigate("/login", {replace: true})
       })
       .catch(err => {
         console.error(err)

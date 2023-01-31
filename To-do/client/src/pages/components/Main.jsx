@@ -51,7 +51,7 @@ export default function Main(props){
 
     return(
         <div className="main">
-            <h1 className='heading'>{props.user ? `${props.user}'s List` : "Anonymouse's List"}</h1>
+            <h1 className='heading'>{props.username ? `${props.username}'s List` : "Anonymouse's List"}</h1>
             {listItems}
             <FontAwesomeIcon onClick={addItem} className="add-item" icon={faCirclePlus}></FontAwesomeIcon>
         </div>

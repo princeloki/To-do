@@ -1,45 +1,38 @@
-
-
 import { useState, useEffect } from 'react'
 import './App.css'
 import HomePage from './pages/HomePage'
 import { BrowserRouter } from 'react-router-dom';
 import Pages from './Routes';
-import axios from 'axios';
-
 
 function App() {
-  const [user, setUser] = useState({
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || {
     username: "",
     item: [{
       count: 0,
       content: "",
       complete: false
     }]
-  })
+  });
 
-  useEffect(() =>{
-    async function storeUser() {
-      const users = await fetch("/users");
-      if(users.username){
-        console.log(users)
-        setUser(users)
-      }    
-    }
-    storeUser()
-  },[])
+  useEffect(() => {
+    localStorage.setItem('user', JSON.stringify(user));
+  }, [user]);
+
+  function createUser(userData){
+    setUser(userData)
+  }
 
   return (
     <div className="App">
       <BrowserRouter>
         <Pages 
         username={user.username}
-        items={user.item}/>
+        items={user.item}
+        addUser={createUser}
+        />
       </BrowserRouter>
     </div>
   )
 }
 
 export default App
-
-

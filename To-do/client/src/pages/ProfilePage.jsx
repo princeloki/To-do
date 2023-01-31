@@ -3,11 +3,12 @@ import Main from './components/Main'
 import Nav from './components/Nav'
 
 
-function ProfilePage() {
+function ProfilePage(props) {
   return (
     <div className="home">
-      <Nav />
-      <Main />
+      <Nav 
+      username={props.username}
+      />
     </div>
   )
 }
