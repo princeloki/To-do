@@ -3,17 +3,21 @@
 import '../App.css'
 import Main from './components/Main'
 import Nav from './components/Nav'
-import { useState } from 'react'
-
+import { useState,useEffect } from 'react'
+import axios from 'axios';
 
 function RegisterPage() {
   const [formData, setFormData] = useState({
     email: "",
     username: "",
     password: "",
+    items: [{
+      count: 0,
+      content: "",
+      complete: false
+    }]
   })
 
-  
   function handleChange(e){
     setFormData(prevFormData=>{
       return{
@@ -22,11 +26,22 @@ function RegisterPage() {
       }
     })
   }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    axios.post('http://localhost:3000/register', formData)
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
+
   return (
     <div className="register-page">
       <Nav />
-      <h1>Register</h1>
-      <form className="user-form">
+      <form onSubmit={handleSubmit} className="authenticate user-form">
         <input 
         type="text"
         value={formData.email}
@@ -42,7 +57,7 @@ function RegisterPage() {
         onChange={handleChange}
         />
         <input 
-        type="text"
+        type="password"
         value={formData.password}
         name="password"
         placeholder='...Enter password'
@@ -50,6 +65,14 @@ function RegisterPage() {
         />
         <button type="submit">Register</button>
       </form>
+
+      <style>
+        {`
+          body{
+            background: #42b982;
+          }
+        `}
+      </style>
     </div>
   )
 }
