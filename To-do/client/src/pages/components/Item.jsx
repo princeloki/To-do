@@ -6,7 +6,8 @@ import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons'
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import axios from 'axios'
+import { useEffect } from 'react';
 
 
 export default function Item(props){
@@ -17,6 +18,11 @@ export default function Item(props){
         complete: props.complete
     })
 
+    useEffect(() => {
+
+        props.onEdit(itemInfo)
+    },[itemInfo])
+
     function handleSubmit(event){
         const date = new Date();
         setItemInfo({
@@ -24,7 +30,6 @@ export default function Item(props){
             content: name + " on " +date,
             complete: true
         })
-        console.log(itemInfo.content)
     }
 
     return(

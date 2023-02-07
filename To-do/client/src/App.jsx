@@ -6,9 +6,9 @@ import Pages from './Routes';
 
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || {
-    username: "",
-    item: [{
-      count: 0,
+    username: "anonymous",
+    items: [{
+      count: 1,
       content: "",
       complete: false
     }]
@@ -27,7 +27,7 @@ function App() {
       <BrowserRouter>
         <Pages 
         username={user.username}
-        items={user.item}
+        items={user.items}
         addUser={createUser}
         />
       </BrowserRouter>

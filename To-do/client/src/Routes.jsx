@@ -9,10 +9,10 @@ import ProfilePage from './pages/ProfilePage';
 
 const Pages = (props) => (
   <Routes>
-    <Route exact path="/" element={<HomePage username={props.username} items={props.items} />} />
+    <Route exact path="/" element={<HomePage username={props.username} items={props.items} addUser={props.addUser} />} />
     <Route path="/login" element={<LoginPage addUser={props.addUser}/>} />
     <Route path="/register" element={<RegisterPage />} />
-    <Route path="/profile" element={<ProfilePage username={props.username} />} />
+    <Route path="/profile" element={<ProfilePage username={props.username} addUser={props.addUser}/>} />
     {/* <Route component={NotFoundPage} /> */}
   </Routes>
 );

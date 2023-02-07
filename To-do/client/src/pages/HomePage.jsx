@@ -8,6 +8,7 @@ function HomePage(props) {
     <div className="app">
       <Nav 
       username={props.username}
+      addUser={props.addUser}
       />
       <Main 
       username={props.username}

@@ -74,6 +74,19 @@ app.post('/login', async (req, res) => {
 
 app.get("/logout", (req, res) => {
     req.session.destroy()
+    res.send({message: 'successfully logged out'});
+})
+
+app.post("/update", async (req, res) => {
+    const updatedItems = req.body.items
+    try{
+        const user = await Users.findOne({username: req.body.username})
+        user.items = updatedItems;
+        await user.save();
+        res.json({message: "Items updated successfully"})
+    } catch(err){
+        res.json({error: err.message})
+    }
 })
 
 mongoose.connect(
